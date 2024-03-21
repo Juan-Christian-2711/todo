@@ -1,106 +1,70 @@
-## Compose sample application
+# Getting Started with Create React App
 
-### Use with Docker Development Environments
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-You can open this sample in the Dev Environments feature of Docker Desktop version 4.12 or later.
+## Available Scripts
 
-[Open in Docker Dev Environments <img src="../open_in_new.svg" alt="Open in Docker Dev Environments" align="top"/>](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/react-express-mysql)
+In the project directory, you can run:
 
-### React application with a NodeJS backend and a MySQL database
+### `npm start`
 
-Project structure:
-```
-.
-├── backend
-│   ├── Dockerfile
-│   ...
-├── db
-│   └── password.txt
-├── compose.yaml
-├── frontend
-│   ├── ...
-│   └── Dockerfile
-└── README.md
-```
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-[_compose.yaml_](compose.yaml)
-```
-services:
-  backend:
-    build: backend
-    ports:
-      - 80:80
-      - 9229:9229
-      - 9230:9230
-    ...
-  db:
-    # We use a mariadb image which supports both amd64 & arm64 architecture
-    image: mariadb:10.6.4-focal
-    # If you really want to use MySQL, uncomment the following line
-    #image: mysql:8.0.27
-    ...
-  frontend:
-    build: frontend
-    ports:
-    - 3000:3000
-    ...
-```
-The compose file defines an application with three services `frontend`, `backend` and `db`.
-When deploying the application, docker compose maps port 3000 of the frontend service container to port 3000 of the host as specified in the file.
-Make sure port 3000 on the host is not already being in use.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-> ℹ️ **_INFO_**  
-> For compatibility purpose between `AMD64` and `ARM64` architecture, we use a MariaDB as database instead of MySQL.  
-> You still can use the MySQL image by uncommenting the following line in the Compose file   
-> `#image: mysql:8.0.27`
+### `npm test`
 
-## Deploy with docker compose
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```
-$ docker compose up -d
-Creating network "react-express-mysql_default" with the default driver
-Building backend
-Step 1/16 : FROM node:10
- ---> aa6432763c11
-...
-Successfully tagged react-express-mysql_frontend:latest
-WARNING: Image for service frontend was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
-Creating react-express-mysql_db_1 ... done
-Creating react-express-mysql_backend_1 ... done
-Creating react-express-mysql_frontend_1 ... done
-```
+### `npm run build`
 
-## Expected result
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Listing containers must show containers running and the port mapping as below:
-```
-$ docker ps
-CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS                   PORTS                                                  NAMES
-f3e1183e709e        react-express-mysql_frontend   "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes             0.0.0.0:3000->3000/tcp                                 react-express-mysql_frontend_1
-9422da53da76        react-express-mysql_backend    "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes (healthy)   0.0.0.0:80->80/tcp, 0.0.0.0:9229-9230->9229-9230/tcp   react-express-mysql_backend_1
-a434bce6d2be        mysql:8.0.19                   "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes             3306/tcp, 33060/tcp                                    react-express-mysql_db_1
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-After the application starts, navigate to `http://localhost:3000` in your web browser.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-![page](./output.png)
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-The backend service container has the port 80 mapped to 80 on the host.
-```
-$ curl localhost:80
-{"message":"Hello from MySQL 8.0.19"}
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Stop and remove the containers
-```
-$ docker compose down
-Stopping react-express-mysql_frontend_1 ... done
-Stopping react-express-mysql_backend_1  ... done
-Stopping react-express-mysql_db_1       ... done
-Removing react-express-mysql_frontend_1 ... done
-Removing react-express-mysql_backend_1  ... done
-Removing react-express-mysql_db_1       ... done
-Removing network react-express-mysql_default
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
