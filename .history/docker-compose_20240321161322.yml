@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  react-app:
+    image: node
+    container_name: react-app
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: [ "npm", "install" ]
+    command

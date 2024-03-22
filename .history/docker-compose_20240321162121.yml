@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: node:lts
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend/node_modules:/app/frontend/node_modules
+      - ./frontend:/app/frontend
+    ports:
+      - "3000:3000"
+    command: npm start

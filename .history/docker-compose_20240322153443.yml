@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  sample:
+    container_name: sample
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      
+
+
+  mariadb:
+      image: mariadb
+      restart: always
+    en vironment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: your_database_name
+      MYSQL_USER: your_database_user
+      MYSQL_PASSWORD: your_database_password
+    # No need to expose ports for external access
+
+  node_api:
+    image: node:14
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"  # Expose the API port
+    depends_on:
+      - mariadb      

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  react-app:
+    image: node:14
+    container_name: react-app
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["npm", "start"]

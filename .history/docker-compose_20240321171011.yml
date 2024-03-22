@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+"
+
+  node_api:
+    image: node
+    container_name: node_api
+    restart: always
+    ports:
+      - "3030:3030"
+    depends_on:
+      - mariadb
+    environment:
+      DB_HOST: mariadb
+      DB_USER: root
+      DB_PASSWORD: examplepassword
+      DB_DATABASE: mydatabase
+
+volumes:
+  mariadb_data:

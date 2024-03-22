@@ -1,0 +1,35 @@
+# Use a lightweight base image
+FROM node:alpine AS build
+
+# Set working directory
+WORKDIR /home/node/app
+
+# Copy package.json and package-lock.json to leverage Docker layer caching
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Copy the rest of the application code
+COPY . .
+
+# Build your application (if necessary)
+# RUN npm run build
+
+# Stage 2: Use a smaller base image for runtime
+FROM node:alpine
+
+# Set working directory
+WORKDIR /home/node/app
+
+# Copy only necessary files from the previous build stage
+COPY --from=build /home/node/app .
+
+# Expose the port
+EXPOSE 3000
+
+# Set NODE_ENV to production
+ENV NODE_ENV=production
+
+# Start the application
+CMD ["npm", "start"]
