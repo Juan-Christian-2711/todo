@@ -1,43 +1,66 @@
 import React, { useState } from 'react';
-import './App.css';
+import TodoItem from './TodoListItem';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [todo, setTodo] = useState(new TodoItem());
+  const [itemsList, setItemsList] = useState([]);
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTodo((prevTodo) => ({
+      ...prevTodo,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.trim() !== '') {
-      setTodos([...todos, inputValue]);
-      setInputValue('');
+    if (todo.title.trim() !== '' && todo.priority.trim() !== '') {
+      setItemsList([...itemsList, todo]);
+      setTodo(new TodoItem());
     }
   };
 
-  const handleDelete = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
-  };
-
   return (
-    <div className="App">
-      <h1>Todo List</h1>
+    <div>
+      <h1>Todo</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Add Todo"
-          value={inputValue}
-          onChange={handleChange}
+          name="title"
+          placeholder="Title"
+          value={todo.title}
+          onChange={handleInputChange}
         />
-        <button type="submit">Add</button>
+        <input
+          type="number"
+          name="priority"
+          placeholder="Priority"
+          value={todo.priority}
+          onChange={handleInputChange}
+          max="5"
+          min="1"
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={todo.description}
+          onChange={handleInputChange}
+        />
+        <input
+          type="date"
+          name="dueDate"
+          placeholder="Due Date"
+          value={todo.dueDate}
+          onChange={handleInputChange}
+        />
+        <input type="submit" />
       </form>
       <ul>
-        {todos.map((todo, index) => (
+        {itemsList.map((item, index) => (
           <li key={index}>
-            {todo}
-            <button onClick={() => handleDelete(index)}>complete</button>
+            <strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
           </li>
         ))}
       </ul>
