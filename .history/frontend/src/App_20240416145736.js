@@ -19,10 +19,10 @@ function App() {
       setItemsList([...itemsList, todo]);
       setTodo(new TodoItem());
     }
-  }
+  };
 
   const handleDelete = (e) => {
-    setItemsList(itemsList)
+    
   }
 
   return (

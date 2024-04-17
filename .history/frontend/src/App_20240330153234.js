@@ -19,11 +19,7 @@ function App() {
       setItemsList([...itemsList, todo]);
       setTodo(new TodoItem());
     }
-  }
-
-  const handleDelete = (e) => {
-    setItemsList(itemsList)
-  }
+  };
 
   return (
     <div>
@@ -57,7 +53,7 @@ function App() {
           name="dueDate"
           placeholder="Due Date"
           value={todo.dueDate}
-          onChange={handleInputChange}
+          onChange={}
         />
         <input type="submit" />
       </form>
@@ -65,9 +61,6 @@ function App() {
         {itemsList.map((item, index) => (
           <li key={index}>
             <strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
-            <button>complete</button>
-            <button>edit</button>
-            <button onClick={this.handleDelete}>delete</button>
           </li>
         ))}
       </ul>

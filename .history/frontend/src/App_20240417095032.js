@@ -44,15 +44,7 @@ function App() {
           onChange={handleInputChange}
           max="5"
           min="1"
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Description"
-          value={todo.description}
-          onChange={handleInputChange}
-        />
-        <input
+         <input
           type="date"
           name="dueDate"
           placeholder="Due Date"
@@ -76,3 +68,12 @@ function App() {
 }
 
 export default App;
+     />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={todo.description}
+          onChange={handleInputChange}
+        />
+  

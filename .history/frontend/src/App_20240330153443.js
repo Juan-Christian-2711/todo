@@ -19,11 +19,7 @@ function App() {
       setItemsList([...itemsList, todo]);
       setTodo(new TodoItem());
     }
-  }
-
-  const handleDelete = (e) => {
-    setItemsList(itemsList)
-  }
+  };
 
   return (
     <div>
@@ -67,7 +63,7 @@ function App() {
             <strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
             <button>complete</button>
             <button>edit</button>
-            <button onClick={this.handleDelete}>delete</button>
+            <button></button>
           </li>
         ))}
       </ul>

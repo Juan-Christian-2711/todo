@@ -22,7 +22,8 @@ function App() {
   }
 
   const handleDelete = (e) => {
-    setItemsList(itemsList)
+    this.itemsList
+    
   }
 
   return (

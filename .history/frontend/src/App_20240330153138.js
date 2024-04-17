@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TodoItem from './TodoListItem';
+import TodoItem from '../../api/TodoListItem';
 
 function App() {
   const [todo, setTodo] = useState(new TodoItem());
@@ -19,11 +19,7 @@ function App() {
       setItemsList([...itemsList, todo]);
       setTodo(new TodoItem());
     }
-  }
-
-  const handleDelete = (e) => {
-    setItemsList(itemsList)
-  }
+  };
 
   return (
     <div>
@@ -65,9 +61,6 @@ function App() {
         {itemsList.map((item, index) => (
           <li key={index}>
             <strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
-            <button>complete</button>
-            <button>edit</button>
-            <button onClick={this.handleDelete}>delete</button>
           </li>
         ))}
       </ul>
