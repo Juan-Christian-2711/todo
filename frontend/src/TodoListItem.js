@@ -1,6 +1,7 @@
 class TodoItem {
-    constructor(title = '', priority = '', description = '', dueDate = '') {
-        this.title = title;
+    constructor(title = '', priority = '', description = '', dueDate = '', id = 0) {
+	this.id = id;
+	this.title = title;
         this.priority = priority;
         this.description = description;
         this.dueDate = dueDate;

@@ -12,11 +12,18 @@ function App() {
 		}));
 	};
 
+
+	const setID = () => { 
+		todo.id = itemsList.length
+	}
 	const handleSubmit = (e) => {
     e.preventDefault();
     if (todo.title.trim() !== '' && todo.priority.trim() !== '') {
-      setItemsList([...itemsList, todo]);
-      setTodo(new TodoItem());
+	    setID()
+
+	    console.log(todo.id)
+	    
+	setItemsList([...itemsList, todo]); setTodo(new TodoItem());
     }
   }
 
