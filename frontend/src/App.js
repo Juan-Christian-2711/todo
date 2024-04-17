@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import TodoItem from './TodoListItem';
 
 function App() {
-  const [todo, setTodo] = useState(new TodoItem());
-  const [itemsList, setItemsList] = useState([]);
+	const [todo, setTodo] = useState(new TodoItem());
+	const [itemsList, setItemsList] = useState([]);
+	const handleInputChange = (e) => {
+		const { name, value } = e.target;
+		setTodo((prevTodo) => ({      
+			...prevTodo,
+			[name]: value
+		}));
+	};
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setTodo((prevTodo) => ({
-      ...prevTodo,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
     e.preventDefault();
     if (todo.title.trim() !== '' && todo.priority.trim() !== '') {
       setItemsList([...itemsList, todo]);
@@ -22,11 +21,12 @@ function App() {
   }
 
   const handleDelete = (e) => {
-    setItemsList(itemsList)
+	  e.preventDefault();
+    setItemsList(itemsList);
   }
 
-  return (
-    <div>
+	const input = (
+		<div>
       <h1>Todo</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -61,16 +61,25 @@ function App() {
         />
         <input type="submit" />
       </form>
-      <ul>
-        {itemsList.map((item, index) => (
-          <li key={index}>
-            <strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
-            <button>complete</button>
-            <button>edit</button>
-            <button onClick={this.handleDelete}>delete</button>
+</div> 
+	)
+
+	const todoList = (
+		<ul>        
+		{itemsList.map((item, index) => (
+			<li key={index}>
+			<strong>{item.title}</strong> - Priority: {item.priority}, Description: {item.description}, Due Date: {item.dueDate}
+			<button>complete</button>
+			<button>edit</button>
+            <button onClick={handleDelete}>delete</button>
           </li>
         ))}
       </ul>
+	)
+  return (
+    <div>
+	  {input}
+	  {todoList}
     </div>
   );
 }
